@@ -114,8 +114,7 @@ const TimeEntryForm: React.FC<Props> = ({ onEntryCreated }) => {
   return (
     <Box
       sx={{
-        maxWidth: "900px",
-        margin: "0 auto",
+        width: "100%",
         background: "linear-gradient(145deg, #ffffff 0%, #f9fafb 100%)",
         borderRadius: "20px",
         padding: { xs: "1.5rem", sm: "2.5rem", md: "3rem" },

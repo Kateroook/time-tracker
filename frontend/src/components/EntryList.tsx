@@ -63,8 +63,7 @@ const EntryList: React.FC<Props> = ({
   return (
     <Box
       sx={{
-        maxWidth: "900px",
-        mx: "auto",
+        width: "100%",
         mt: 5,
         background: "linear-gradient(145deg, #ffffff 0%, #f9fafb 100%)",
         borderRadius: "20px",

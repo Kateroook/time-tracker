@@ -1,12 +1,14 @@
 import React from "react";
 import Home from "./pages/Home";
+import { CssBaseline } from "@mui/material";
+
 
 function App() {
     return (
-    <div className="App">
-      <h1>Mini Time Tracker</h1>
+    <>      
+      <CssBaseline />
       <Home />
-    </div>
+    </>
   );
 }
 
