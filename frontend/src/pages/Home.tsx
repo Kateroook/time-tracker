@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchEntries, createEntry } from "../api/entries";
 import type { TimeEntry } from "../types/entry";
 import TimeEntryForm from "../components/TimeEntryForm";
+import EntryList from "../components/EntryList";
 
 const Home: React.FC = () => {
   const [entries, setEntries] = useState<TimeEntry[]>([]);
@@ -33,14 +34,8 @@ const handleEntryCreated = (entry: TimeEntry) => {
     <div>
       <h2>Mini Time Tracker</h2>
       <TimeEntryForm onEntryCreated={handleEntryCreated} />
-      {loading && <p>Loading...</p>}
-      <ul>
-        {entries.map((e) => (
-          <li key={e.id}>
-            {e.date} | {e.project} | {e.hours}h | {e.description}
-          </li>
-        ))}
-      </ul>
+      <EntryList entries={entries} />
+      
     </div>
   );
 };
