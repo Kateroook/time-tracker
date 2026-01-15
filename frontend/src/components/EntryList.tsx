@@ -62,65 +62,27 @@ const EntryList: React.FC<Props> = ({
   
   return (
     <Box
-      sx={{
-        width: "100%",
-        mt: 5,
-        background: "linear-gradient(145deg, #ffffff 0%, #f9fafb 100%)",
-        borderRadius: "20px",
-        p: { xs: 2, sm: 3, md: 4 },
-        border: "1px solid rgba(0,0,0,0.06)",
-        boxShadow:
-          "0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
-      }}
+      className="ds-card ds-p-card ds-w-full"
+      sx={{ mt: 5 }}
     >
       {/* Header */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 4,
-          flexWrap: "wrap",
-          gap: 2,
-        }}
-      >
+      <Box className="ds-header">
         <Typography
           variant="h4"
-          sx={{
-            fontWeight: 600,
-            fontSize: { xs: "1.4rem", sm: "1.75rem" },
-            color: "#1d1d1f",
-            letterSpacing: "-0.02em",
-          }}
+          className="ds-heading ds-heading-md-sm"
         >
           History
         </Typography>
 
-        <Box
-          sx={{
-            px: 2.5,
-            py: 1,
-            borderRadius: "999px",
-            backgroundColor: "#f5f5f7",
-            fontWeight: 500,
-            fontSize: "0.95rem",
-            color: "#1d1d1f",
-          }}
-        >
+        <Box className="ds-badge">
           Total: {grandTotal.toFixed(2)} hrs
         </Box>
       </Box>
 
       {/* Empty state */}
       {sortedDates.length === 0 ? (
-        <Box
-          sx={{
-            textAlign: "center",
-            py: 10,
-            color: "#8e8e93",
-          }}
-        >
-          <Typography sx={{ mt: 2, fontSize: "1.05rem" }}>
+        <Box className="ds-empty-state">
+          <Typography className="ds-mt-2 ds-h5">
             No entries yet
           </Typography>
         </Box>
@@ -136,37 +98,21 @@ const EntryList: React.FC<Props> = ({
             return (
               <Box key={dateKey}>
                 {/* Date header */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    mb: 1.5,
-                  }}
-                >
+                <Box className="ds-subheader">
                   <Typography
-                    sx={{
-                      fontSize: "1.05rem",
-                      fontWeight: 600,
-                      color: "#1d1d1f",
-                      letterSpacing: "-0.01em",
-                    }}
+                      className="ds-text-bold ds-h5 ds-tracking-tight"
                   >
                     {formatDate(dateKey)}
                   </Typography>
 
                   <Typography
-                    sx={{
-                      fontSize: "0.9rem",
-                      fontWeight: 500,
-                      color: "#6e6e73",
-                    }}
+                      className="ds-text-muted ds-text-semibold ds-text-sm"
                   >
                     {dayTotal.toFixed(2)} hrs
                   </Typography>
                 </Box>
 
-                <Divider sx={{ mb: 2 }} />
+                <Divider sx={{ marginBottom: "var(--space-4)" }} />
 
                 {/* Entries */}
                 <Stack spacing={1.5}>
@@ -174,63 +120,36 @@ const EntryList: React.FC<Props> = ({
                     <Paper
                       key={entry.id}
                       elevation={0}
-                      sx={{
-                        p: 2.5,
-                        borderRadius: "12px",
-                        backgroundColor: "#ffffff",
-                        border: "1px solid #e5e5ea",
-                        transition: "all 0.2s ease",
-                        "&:hover": {
-                          backgroundColor: "#f5f5f7",
-                          transform: "translateY(-1px)",
-                        },
-                      }}
+                      className="ds-card-item"
+                      sx={{ p: 2.5, borderRadius: "var(--radius-xl)" }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
-                          mb: 0.75,
-                          gap: 1,
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontSize: "0.95rem",
-                            fontWeight: 600,
-                            color: "#1d1d1f",
-                          }}
-                        >
+                      <Box className="ds-flex-between ds-gap-2" sx={{ mb: 0.75 }}>
+                        <Typography className="ds-text-bold ds-text-body">
                           {entry.project}
                         </Typography>
-                        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                        <Typography
-                          sx={{
-                            fontSize: "0.85rem",
-                            fontWeight: 600,
-                            color: "#007aff",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {entry.hours}h
-                        </Typography>
-                        <IconButton
-                            size="small"
-                            onClick={() => {
-                            setEditingId(entry.id);
-                            setEditValue(entry.description);
-                            }}
-                        >
-                            <Edit2 size={16} />
-                        </IconButton>
+                        <Box className="ds-flex-row ds-gap-1" sx={{ alignItems: "center" }}>
+                          <Typography
+                              className="ds-text-bold ds-text-sm ds-whitespace-nowrap"
+                              sx={{ color: "var(--color-primary)" }}
+                          >
+                            {entry.hours}h
+                          </Typography>
+                          <IconButton
+                              size="small"
+                              onClick={() => {
+                              setEditingId(entry.id);
+                              setEditValue(entry.description);
+                              }}
+                          >
+                              <Edit2 size={16} />
+                          </IconButton>
 
-                        <IconButton
-                            size="small"
-                            onClick={() => setDeleteId(entry.id)}
-                        >
-                            <Trash2 size={16} />
-                        </IconButton>
+                          <IconButton
+                              size="small"
+                              onClick={() => setDeleteId(entry.id)}
+                          >
+                              <Trash2 size={16} />
+                          </IconButton>
                         </Box>
                       </Box>
 
@@ -247,18 +166,14 @@ const EntryList: React.FC<Props> = ({
                         rows={3}
                         sx={{
                           "& .MuiOutlinedInput-root": {
-                            borderRadius: "10px",
+                            borderRadius: "var(--radius-xl)",
                           },
                         }}
                       />
 
                       <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          gap: 1,
-                          mt: 1,
-                        }}
+                        className="ds-flex-row"
+                        sx={{ justifyContent: "flex-end", gap: "var(--space-2)", marginTop: "var(--space-2)" }}
                       >
                         <Button
                           size="small"
@@ -278,12 +193,7 @@ const EntryList: React.FC<Props> = ({
                       </Box>
                     </>
                   ) : (
-                    <Typography
-                      sx={{
-                        fontSize: "0.95rem",
-                        color: "#6e6e73",
-                      }}
-                    >
+                    <Typography className="ds-text-body">
                       {entry.description}
                     </Typography>
                   )}

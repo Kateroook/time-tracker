@@ -35,51 +35,22 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        background:
-          "linear-gradient(180deg, #f5f5f7 0%, #ffffff 60%)",
-        py: { xs: 6, md: 12 },
-      }}
-    >
-      <Box sx={{ width: "100%", px: { xs: 2, md: 6 } }}>
-        <Box
-          sx={{
-            mb: 6,
-            textAlign: "center",
-            maxWidth: 900,
-            mx: "auto",
-          }}
-        >
+    <Box className="ds-flex-col" sx={{ py: { xs: "var(--space-6)", md: "var(--space-12)" } }}>
+      <Box className="ds-w-full" sx={{ px: { xs: 2, md: 6 } }}>
+        <Box className="ds-mb-4 ds-text-center ds-max-w-md ds-mx-auto">
           <Typography
-            sx={{
-              fontSize: { xs: "2rem", sm: "2.5rem" },
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-              color: "#1d1d1f",
-              mb: 1,
-            }}
+            className="ds-heading ds-heading-lg-sm"
           >
             Mini Time Tracker
           </Typography>
         </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: { xs: 4, sm: 6 },
-          }}
-        >
-          <Box sx={{ maxWidth: 700, width: "100%", mx: "auto" }}>
+        <Box className="ds-flex-col" sx={{ gap: { xs: 4, sm: 6 } }}>
+          <Box className="ds-max-w-sm ds-w-full ds-mx-auto">
             <TimeEntryForm onEntryCreated={handleEntryCreated} />
           </Box>
 
-          <Box sx={{ maxWidth: 700, width: "100%", mx: "auto" }}>
+          <Box className="ds-max-w-sm ds-w-full ds-mx-auto">
             <EntryList
               entries={entries}
               onEntryUpdated={handleEntryUpdated}

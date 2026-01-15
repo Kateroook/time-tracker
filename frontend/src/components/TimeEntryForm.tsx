@@ -90,54 +90,37 @@ const TimeEntryForm: React.FC<Props> = ({ onEntryCreated }) => {
   };
 
   const fieldStyles = {
-    borderRadius: "12px", 
+    borderRadius: "var(--radius-xl)",
 
     "& .MuiOutlinedInput-root": {
-      borderRadius: "12px",
-      backgroundColor: "#fff",
+      borderRadius: "var(--radius-xl)",
+      backgroundColor: "var(--color-surface)",
       transition: "all 0.2s ease",
       "&:hover": {
-        backgroundColor: "#fafafa",
+        backgroundColor: "var(--color-surface-variant)",
       },
       "&.Mui-focused": {
-        backgroundColor: "#fff",
-        boxShadow: "0 0 0 4px rgba(0, 122, 255, 0.1)",
+        backgroundColor: "var(--color-surface)",
+        boxShadow: "var(--shadow-focus)",
       },
-      "&.Mui-error": {
-        backgroundColor: "#fff5f5",
-        boxShadow: "0 0 0 4px rgba(255, 59, 48, 0.1)",
-        borderColor: "#ff3b30",
+       "&.Mui-error": { 
+         backgroundColor: "var(--color-danger-surface)", 
+         boxShadow: "var(--shadow-focus-error)", 
+         borderColor: "var(--color-danger)", 
       },
     },
   };
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        background: "linear-gradient(145deg, #ffffff 0%, #f9fafb 100%)",
-        borderRadius: "20px",
-        padding: { xs: "1.5rem", sm: "2.5rem", md: "3rem" },
-        border: "1px solid rgba(0, 0, 0, 0.06)",
-        boxShadow: "0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)",
-        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        "&:hover": {
-          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04)",
-        },
-      }}
-    >
-      <Typography 
-        variant="h4" 
-        sx={{ 
-          mb: 4, 
-          fontWeight: 600,
-          fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
-          color: "#1d1d1f",
-          letterSpacing: "-0.02em",
-        }}
-      >
-        New Time Entry
-      </Typography>
+    <Box className="ds-card ds-p-card">
+      <Box className="ds-header">
+        <Typography 
+          variant="h4" 
+          className="ds-heading ds-h3"
+        >
+          New Time Entry
+        </Typography>
+      </Box>
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Stack spacing={3}>
@@ -145,7 +128,7 @@ const TimeEntryForm: React.FC<Props> = ({ onEntryCreated }) => {
             direction={{ xs: "column", sm: "row" }} 
             spacing={2}
           >
-            <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Box sx={{ flex: 1 }}>
               <DatePicker
                 label="Date"
                 value={date}
@@ -164,7 +147,7 @@ const TimeEntryForm: React.FC<Props> = ({ onEntryCreated }) => {
               />
             </Box>
 
-            <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Box sx={{ flex: 1 }}>
               <TextField
                 label="Project"
                 select
@@ -186,7 +169,7 @@ const TimeEntryForm: React.FC<Props> = ({ onEntryCreated }) => {
               </TextField>
             </Box>
 
-            <Box sx={{ flex: { xs: 1, sm: 0.7 }, minWidth: 0 }}>
+            <Box sx={{ flex: { xs: 1, sm: 0.7 } }}>
               <TextField
                 label="Hours"
                 type="number"
@@ -232,29 +215,17 @@ const TimeEntryForm: React.FC<Props> = ({ onEntryCreated }) => {
           {/* Alerts */}
           {error && (
             <Fade in={!!error}>
-              <Alert 
-                severity="error"
-                sx={{ 
-                  borderRadius: "12px",
-                  border: "1px solid rgba(255, 59, 48, 0.2)",
-                }}
-              >
+              <div className="ds-alert ds-alert--error">
                 {error}
-              </Alert>
+              </div>
             </Fade>
           )}
 
           {success && (
             <Fade in={success}>
-              <Alert 
-                severity="success"
-                sx={{ 
-                  borderRadius: "12px",
-                  border: "1px solid rgba(52, 199, 89, 0.2)",
-                }}
-              >
+              <div className="ds-alert ds-alert--success">
                 Time entry saved successfully!
-              </Alert>
+              </div>
             </Fade>
           )}
 
@@ -264,28 +235,7 @@ const TimeEntryForm: React.FC<Props> = ({ onEntryCreated }) => {
             onClick={handleSubmit}
             disabled={loading}
             fullWidth
-            sx={{
-              borderRadius: "12px",
-              padding: "14px 24px",
-              fontSize: "1rem",
-              fontWeight: 600,
-              textTransform: "none",
-              backgroundColor: "#007aff",
-              boxShadow: "0 2px 8px rgba(0, 122, 255, 0.3)",
-              transition: "all 0.2s ease",
-              "&:hover": {
-                backgroundColor: "#0051d5",
-                boxShadow: "0 4px 16px rgba(0, 122, 255, 0.4)",
-                transform: "translateY(-1px)",
-              },
-              "&:active": {
-                transform: "translateY(0)",
-              },
-              "&.Mui-disabled": {
-                backgroundColor: "#e5e5ea",
-                color: "#8e8e93",
-              },
-            }}
+            className="ds-btn ds-btn-primary"
           >
             {loading ? "Saving..." : "Save Entry"}
           </Button>
