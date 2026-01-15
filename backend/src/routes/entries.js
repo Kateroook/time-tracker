@@ -11,4 +11,7 @@ router.get("/", entryController.getEntries);
 // Update entry by id
 router.patch("/:id", entryController.updateEntry);
 
+// Delete entry by id
+router.delete("/:id", entryController.deleteEntry);
+
 module.exports = router;

@@ -47,5 +47,15 @@ async function updateEntry(req, res) {
   }
 }
 
+async function deleteEntry(req, res) {
+  try {
+    const { id } = req.params;
+    await entryService.deleteEntry(Number(id));
+    res.json({ message: "Entry deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
 
-module.exports = { createEntry, getEntries, updateEntry};
+
+module.exports = { createEntry, getEntries, updateEntry, deleteEntry};

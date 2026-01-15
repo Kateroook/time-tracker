@@ -25,6 +25,14 @@ async function updateEntry(id, description) {
   return entry;
 }
 
+// Delete entry
+async function deleteEntry(id) {
+  const existing = await prisma.timeEntry.findUnique({ where: { id: Number(id) } });
+  if (!existing) throw new Error("Entry not found");
+
+  return prisma.timeEntry.delete({ where: { id: Number(id) } });
+}
+
 // Helper: enforce 24-hour/day limit
 async function checkDailyLimit(date, hours, ignoreId = null) {
   const start = new Date(date);
@@ -45,4 +53,4 @@ async function checkDailyLimit(date, hours, ignoreId = null) {
   }
 }
 
-module.exports = { createEntry, getEntries, updateEntry };
+module.exports = { createEntry, getEntries, updateEntry, deleteEntry };
