@@ -16,6 +16,14 @@ async function getEntries() {
   });
 }
 
+// Update entry
+async function updateEntry(id, description) {
+  const entry = await prisma.timeEntry.update({
+    where: { id },
+    data: { description },
+  });
+  return entry;
+}
 
 // Helper: enforce 24-hour/day limit
 async function checkDailyLimit(date, hours, ignoreId = null) {
@@ -37,4 +45,4 @@ async function checkDailyLimit(date, hours, ignoreId = null) {
   }
 }
 
-module.exports = { createEntry, getEntries};
+module.exports = { createEntry, getEntries, updateEntry };

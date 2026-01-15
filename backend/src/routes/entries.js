@@ -8,4 +8,7 @@ router.post("/", entryController.createEntry);
 // Get all time entries
 router.get("/", entryController.getEntries);
 
+// Update entry by id
+router.patch("/:id", entryController.updateEntry);
+
 module.exports = router;

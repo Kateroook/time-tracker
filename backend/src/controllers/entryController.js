@@ -29,4 +29,23 @@ async function getEntries(req, res) {
   }
 }
 
-module.exports = { createEntry, getEntries};
+
+async function updateEntry(req, res) {
+  try {
+    const { id } = req.params;
+    const { description } = req.body;
+
+    if (!description) {
+      return res.status(400).json({ error: "Description is required" });
+    }
+
+    const updated = await entryService.updateEntry(Number(id), description);
+
+    res.json(updated);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
+
+module.exports = { createEntry, getEntries, updateEntry};
