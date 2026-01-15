@@ -1,8 +1,11 @@
 const entryService = require("../services/entryService");
+const { validateEntry } = require("../validators/entryValidator");
 
 async function createEntry(req, res) {
   try {
     const { date, project, hours, description } = req.body;
+
+    validateEntry({ date: new Date(date), project, hours, description });
 
     const entry = await entryService.createEntry({
       date: new Date(date),
