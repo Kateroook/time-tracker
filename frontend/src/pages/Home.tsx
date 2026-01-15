@@ -27,14 +27,26 @@ const Home: React.FC = () => {
   }, []);
 
 const handleEntryCreated = (entry: TimeEntry) => {
-    setEntries([entry, ...entries]);
+  setEntries((prev) => [entry, ...prev]);
+};
+
+const handleEntryUpdated = (updated: TimeEntry) => {
+  setEntries((prev) => prev.map((e) => (e.id === updated.id ? updated : e)));
+};
+
+const handleEntryDeleted = (id: number) => {
+  setEntries((prev) => prev.filter((e) => e.id !== id));
 };
 
   return (
     <div>
       <h2>Mini Time Tracker</h2>
       <TimeEntryForm onEntryCreated={handleEntryCreated} />
-      <EntryList entries={entries} />
+      <EntryList
+        entries={entries}
+        onEntryUpdated={handleEntryUpdated}
+        onEntryDeleted={handleEntryDeleted}
+      />
       
     </div>
   );
