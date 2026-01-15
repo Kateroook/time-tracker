@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchEntries, createEntry } from "../api/entries";
 import type { TimeEntry } from "../types/entry";
+import TimeEntryForm from "../components/TimeEntryForm";
 
 const Home: React.FC = () => {
   const [entries, setEntries] = useState<TimeEntry[]>([]);
@@ -19,29 +20,19 @@ const Home: React.FC = () => {
     }
   };
 
-  const addDummyEntry = async () => {
-    try {
-      const entry = await createEntry({
-        date: new Date().toISOString(),
-        project: "Client A",
-        hours: 2,
-        description: "Test entry from frontend",
-      });
-      alert("Created entry with ID " + entry.id);
-      loadEntries(); // refresh list
-    } catch (err: any) {
-      alert(err.response?.data?.error || err.message);
-    }
-  };
 
   useEffect(() => {
     loadEntries();
   }, []);
 
+const handleEntryCreated = (entry: TimeEntry) => {
+    setEntries([entry, ...entries]);
+};
+
   return (
     <div>
       <h2>Mini Time Tracker</h2>
-      <button onClick={addDummyEntry}>Add Dummy Entry</button>
+      <TimeEntryForm onEntryCreated={handleEntryCreated} />
       {loading && <p>Loading...</p>}
       <ul>
         {entries.map((e) => (
